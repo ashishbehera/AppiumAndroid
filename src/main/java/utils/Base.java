@@ -105,7 +105,8 @@ public class Base {
 		File appDir = new File("src/main/java/resources");
 		File app = new File(appDir,(String) prop.getProperty(appKey));
 		DesiredCapabilities cap = new DesiredCapabilities();
-		String deviceDet = prop.getProperty(device);
+		//String deviceDet = prop.getProperty(device);
+		String deviceDet = System.getProperty("deviceName");
 		System.out.println("deviceDet: "+deviceDet);
 		if(deviceDet.contains("emulator")) {
 			startEmulator();
