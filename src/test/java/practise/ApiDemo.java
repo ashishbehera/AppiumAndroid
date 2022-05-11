@@ -16,7 +16,7 @@ public class ApiDemo extends Base {
 	public  void viewPreferences(String input) throws IOException, InterruptedException {
 		startServer();
 		// TODO Auto-generated method stub
-		AndroidDriver<AndroidElement> driver = capabilities("androidEmulator","apiDemos");
+		AndroidDriver<AndroidElement> driver = capabilities("apiDemos");
 	
 		HomePage hp = new HomePage(driver);
 		hp.Preferences.click();
