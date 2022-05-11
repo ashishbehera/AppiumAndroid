@@ -113,7 +113,7 @@ public class Base {
 		}
 
 
-		cap.setCapability(MobileCapabilityType.DEVICE_NAME,(String) prop.getProperty(device));
+		cap.setCapability(MobileCapabilityType.DEVICE_NAME, deviceDet);
 		cap.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
 		cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2");
 	    driver = new AndroidDriver<>(new URL(appiumServiceUrl),cap);
