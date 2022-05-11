@@ -1,1 +1,1 @@
-# AppiumE2EAndroid
+# AppiumE2EAndroidTestNG
