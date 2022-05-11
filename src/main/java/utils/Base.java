@@ -98,6 +98,9 @@ public class Base {
 
 	public static AndroidDriver<AndroidElement> capabilities(String device, String appKey) throws IOException, InterruptedException {
 
+	
+		
+		try {
 		Properties prop= new Properties();
 		FileInputStream fis=new FileInputStream(System.getProperty("user.dir")+"/src/main/java/resources/global.properties");
 		prop.load(fis);
@@ -116,9 +119,12 @@ public class Base {
 		cap.setCapability(MobileCapabilityType.DEVICE_NAME, deviceDet);
 		cap.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
 		cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2");
-	    driver = new AndroidDriver<>(new URL(appiumServiceUrl),cap);
+	   	 driver = new AndroidDriver<>(new URL(appiumServiceUrl),cap);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return driver;
+		}catch (Exception e){
+			System.out.println("Exception while creating sessions/capabbilities "+e.getMessage());
+		}
 
 	}
 
