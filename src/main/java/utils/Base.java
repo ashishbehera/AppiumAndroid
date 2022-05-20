@@ -24,7 +24,7 @@ import io.appium.java_client.service.local.flags.GeneralServerFlag;
 import java.net.ServerSocket;
 
 public class Base {
-	public static AndroidDriver<AndroidElement> driver = null;
+	public static AndroidDriver<AndroidElement> driver;
 	public static AppiumDriverLocalService service;
 	public static String appiumServiceUrl  = null; 
 	
@@ -96,7 +96,7 @@ public class Base {
 //		return isServerRunning;
 //	}
 
-	public static AndroidDriver<AndroidElement> capabilities(String device, String appKey) throws IOException, InterruptedException {
+	public static AndroidDriver<AndroidElement> capabilities(String appKey) throws IOException, InterruptedException {
 
 		Properties prop= new Properties();
 		FileInputStream fis=new FileInputStream(System.getProperty("user.dir")+"/src/main/java/resources/global.properties");
@@ -112,20 +112,39 @@ public class Base {
 			startEmulator();
 		}
 
-
-		cap.setCapability(MobileCapabilityType.DEVICE_NAME,(String) prop.getProperty(device));
+		System.out.println("I am at 115");
+		cap.setCapability(MobileCapabilityType.DEVICE_NAME, deviceDet);
+		System.out.println("I am at 117");
 		cap.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
+		System.out.println(app.getAbsolutePath());
+		System.out.println("I am at 119");
 		cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2");
-	    driver = new AndroidDriver<>(new URL(appiumServiceUrl),cap);
+		System.out.println("I am at 121");
+		cap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT,14);
+		System.out.println("appiumServiceUrl"+appiumServiceUrl);
+		System.out.println("driver value before"+driver);
+		System.out.println("cap"+cap);
+		String urlAppium = appiumServiceUrl.replace("http://127.0.0.1", "http://localhost");
+		driver = new AndroidDriver<>(new URL(urlAppium),cap);
+		System.out.println("I am at 123");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		System.out.println("driver value after"+driver);
 		return driver;
+
 
 	}
 
 	public static void getScreenshot(String tcName) throws IOException {
-		System.out.println("II am Here:"+tcName);
-		File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		FileUtils.copyFile(srcFile,new File("src/Screenshots/"+tcName+".png"));
+		try {
+			System.out.println("II am Here:"+tcName);
+			System.out.println("driver value"+driver);
+			File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+			FileUtils.copyFile(srcFile,new File("src/Screenshots/"+tcName+".png"));
+		}catch (Exception e){
+			System.out.println("Exception while taking screenshot "+e.getMessage());
+		}
+
+
 
 	}
 	

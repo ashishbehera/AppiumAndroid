@@ -30,7 +30,7 @@ public class Ecom_TC3 extends Base {
 	public  void productCheckout() throws InterruptedException, IOException {
 
 		startServer();
-		AndroidDriver<AndroidElement> driver = capabilities("androidEmulator", "generalStore");
+		AndroidDriver<AndroidElement> driver = capabilities("generalStore");
 
 		FormPage fp = new FormPage(driver);
 		fp.txtName.sendKeys("Hello");

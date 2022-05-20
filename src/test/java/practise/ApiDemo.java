@@ -16,12 +16,12 @@ public class ApiDemo extends Base {
 	public  void viewPreferences(String input) throws IOException, InterruptedException {
 		startServer();
 		// TODO Auto-generated method stub
-		AndroidDriver<AndroidElement> driver = capabilities("androidEmulator","apiDemos");
+		AndroidDriver<AndroidElement> driver = capabilities("apiDemos");
 	
 		HomePage hp = new HomePage(driver);
 		hp.Preferences.click();
 		Preferences pref = new Preferences(driver);
-		pref.prefDependencies.click();
+    	pref.prefDependencies.click();
 		pref.chkBox.click();
 		pref.relativeLayout.click();
 		pref.txtMessage.sendKeys(input);
